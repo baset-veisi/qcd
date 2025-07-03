@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{gensymb}
+\usepackage{esvect}
+
+
+\title{Solutions to the Quantum Circuits and Devices by Prof. Ielmini exercise set \#5}
+\author{}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 1}
+\subsection{Question}
+Consider a quantum harmonic oscillator with $C = 200 fF$, $L = 50 nH$. Calculate the single electron charging energy $E_C$, the inductive energy $E_L$, and the resonance frequency $\omega_0$ 
+
+\subsection{Answer}
+According to the lecture notes:
+$$E_C = \frac{e}{2C}[eV] = \frac{1.6\times 10^{-19}}{2\times 200\times 10^{-15}}[eV] = 0.4\mu eV$$
+$$E_L = \frac{1}{L}(\frac{\Phi_0}{2\pi})^2=\frac{1}{50\times 10^{-9}e}(\frac{h}{4\pi e
+})^2 [eV]= \frac{1}{1.6\times 10^{-19}\times 50\times 10^{-9}}(\frac{6.63\times 10{-34}}{4\pi \times 1.6\times 10^{-19}})^2[eV]$$
+$$=\frac{10^{27}}{8}(0.33\times 10^{-15})^2 [eV] \approx 13.6\mu eV$$
+$$\omega_0 = \frac{1}{\sqrt{LC}} = 10\quad Grad/s$$
+
+\section{Exercise 2}
+Consider two quantum harmonic oscillators with $C_1 = 700 fF$, $L_1 = 15 nH$, and $C_2 = 15 fF$, $L_2 = 700 nH$. For each oscillator, estimate the uncertainties $\Delta N$, $\Delta\phi$ on the number of Cooper pairs $N$ and superconducting phase $\phi$ for the state $\ket{0}$ and determine whether the oscillator would be most suited for a charge qubit or a phase qubit, neglecting leakage to the upper states.   
+\subsection{Answer}
+I don't think the way the tutor solved the question was the best physical way. Let's derive something more quantum mechanical. According to the lecture notes:
+$$H = \frac{Q^2}{2C} + \frac{\Phi^2}{2L},\quad [\Phi,Q] = i\hbar \implies \Delta\Phi\Delta Q \ge \frac{\hbar}{2}$$
+We change variables to $N = \frac{Q}{2e}$ and $\phi = \frac{\Phi}{\frac{\Phi_0}{2\pi}}$ which leads to:
+$$H = 4\frac{e^2}{2C}N^2 + \frac{1}{2L}(\frac{\Phi_0}{2\pi})^2\phi^2, \quad \frac{\Phi_0}{2\pi}2e[\phi,N] = i\hbar \implies [\phi,N] = 1 \implies |\Delta\phi|.|\Delta N| \ge \frac{1}{2}$$
+Being at a certain state of eigen energy means $\bra{0}\Delta H\ket{0} = 0$:
+$$0 = 8E_CN\Delta N + E_L\phi\Delta\phi$$
+knowing $\Delta N_{max} \xleftarrow{} \Delta\phi_{min}$:
+$$ 8E_CN\Delta N_{max} = E_L\phi(N,E_0)\frac{1}{2\Delta N_{max}}$$
+$$\implies \Delta N_{max}^2 = \frac{E_L\phi}{16E_CN}=\frac{E_L}{16E_C}\max{\frac{\phi}{N}}\implies$$
+$$\Delta N_{max}^3=\frac{E_L}{16E_C}[(E_0-4E_C\Delta N_{max}^2)\frac{2}{E_L}]^{1/2}$$
+This solution is only partially completed
+For phase qubits $\Delta\phi < \pi$, for charge qubits $\Delta N < 1$
+
+\section{Exercise 3}
+\subsection{Question}
+Consider an Al/Al2O3/Al Josephson junction ($\epsilon_{Al_2O_3} = 9$) with critical current density $J_0 = 10 \text{A/c$m^2$}$, $W = 2 \mu m$, $L = 1 \mu m$, $t = 1nm$.
+\subsubsection{a}
+Calculate the equivalent capacitance $C_J$ and minimum equivalent inductance $L_{J0}$.
+$$C_J = \frac{\epsilon \epsilon_0 W.L}{t} = \frac{9\times 8.85\times 10^{-12}\times2\times 10^{-3}}{1} = 159.3fF$$
+$$I = I_0\sin{\varphi},\quad 2eV = \hbar\frac{d\varphi}{dt} = \implies 2eV = \hbar \frac{d\varphi}{dI}\frac{dI}{dt} \implies V = \frac{\Phi_0}{2\pi I_0\cos{\varphi}}\frac{dI}{dt}$$
+$$\implies L_{J0} = \frac{\Phi_0}{2\pi J_0 W.L} = \frac{6.63\times 10^{-34}}{4\pi\times 1.6\times 10^{-19}\times 10^5\times 2\times 10^{-12}} \approx 1.65nH $$
+\subsubsection{b}
+Draw a quoted plot of the equivalent inductance $L_J(\varphi)$ as a function of the junction phase $\varphi$.  
+\subsection{Answer}
+$$L_J(\varphi) = \frac{L_{J0}}{\cos{\varphi}},\quad -\frac{\pi}{2} \le \varphi \le \frac{\pi}{2}$$
+
+\section{Exercise 4}
+\subsection{Question}
+Consider an Al/Al2O3/Al Josephson junction ($\epsilon_{Al_2O_3} = 9$) with critical current density $J_0 = 10 \text{A/c$m^2$}$, $W = 2 \mu m$, $L = 1 \mu m$, $t = 1nm$. Estimate the frequencies of the $\ket{0} \xrightarrow{} \ket{1}$ and $\ket{1} \xrightarrow{} \ket{2}$ transitions.  
+\subsection{Answer}
+We first calculate the Josephson Hamiltonian resulting from the Junction:
+$$E_{J} = \frac{\Phi_0 I_0}{2\pi} = L_0I_0^2 = 1.65\times 10^{-9}(2\times 10^{-7})^2 = 6.6\times 10^{-23}J = 412.5\mu eV$$
+If $C << C_J$:
+$$E_C = \frac{e^2}{2C_J} = \frac{2.56\times 10^{-38}}{2\times 159.3\times 10^{-15}}= 0.00804 \times 10^{-23}J = 0.5025 \mu eV$$
+The Hamiltonian is then:
+$$H = -4E_C\frac{\partial^2}{\partial\phi^2} + E_J(1-\cos{\phi}) \approx -4E_C\frac{\partial^2}{\partial\phi^2} + E_J(\frac{\phi^2}{2} - \frac{\phi^4}{4!}) = H_0 - E_J\frac{\phi^4}{4!} = H_0 + H'$$
+What we want is:
+$$\hbar \omega_{12} = \bra{2}H\ket{2} - \bra{1}H\ket{1} = \bra{2}H_0\ket{2} - \bra{1}H_0\ket{1} + \bra{2}H'\ket{2} - \bra{1}H'\ket{1} = $$
+$$\hbar\omega_{01} + \bra{2}H'\ket{2} - \bra{1}H'\ket{1} $$
+$$H' = -\frac{E_J}{24}\phi^4$$
+In resemblence to an H.O. $m\omega^2 \equiv E_J,\quad 4E_C \equiv \frac{\hbar^2}{2m}$
+$$(\frac{2E_C}{E_J})^{\frac{1}{4}} \equiv (\frac{\hbar}{2m\omega})^{\frac{1}{2}} \implies \phi = (\frac{2E_C}{E_J})^{\frac{1}{4}}(a+a^\dagger) = \epsilon_0(a+a^\dagger) \implies $$
+$$\bra{n}\phi^4\ket{n} = \bra{n}\epsilon_0^4(a+a^\dagger)^4\ket{n} = \epsilon_0^4\bra{n}(a^2 + aa^\dagger + a^\dagger a + (a^\dagger)^2)(a^2 + aa^\dagger + a^\dagger a + (a^\dagger)^2)\ket{n} = $$
+We know we are investigating 1 and 2 states, so anything with $a^3$ or $(a^\dagger)^3$ or with more power will automatically be evaluated to 0
+$$\epsilon_0^4\bra{n}(a^2a^\dagger a + a^2(a^\dagger)2 + (aa^\dagger)^2 + a(a^\dagger)^2a + a^\dagger a^2a^\dagger + (a^\dagger a)^2 + a^\dagger a(a^\dagger)^2 + (a^\dagger)^2 a^2 + (a^\dagger)^2aa^\dagger\ket{n}$$
+Only the diagonal elements are kept:
+$$= \epsilon_0^4\bra{n}(a^2(a^\dagger)^2 + (aa^\dagger)^2 + a(a^\dagger)^2a + a^\dagger a^2a^\dagger + (a^\dagger a)^2+(a^\dagger)^2 a^2)\ket{n}$$
+
+$$\bra{1}H'\ket{1} = -\frac{E_J}{24}\frac{2E_C}{E_J}[(n+1)(n+2) + (n+1)^2 + n(n+1) + n(n+1)+ n^2 + n(n-1)] = 
+$$
+$$-\frac{E_C}{12}[6n^2+6n+3] = -\frac{E_C}{4}(2n^2+2n+1) = -\frac{5}{4}E_C$$
+$$\bra{2}H'\ket{2} = -\frac{E_J}{24}\frac{2E_C}{E_J}[6n^2+6n+3] = -\frac{E_C}{4}[2n^2+2n+1]=-\frac{13}{4}E_C$$
+
+$$\hbar\omega_{12} = \hbar\omega_{01} -2E_C \implies \Delta\omega = -2E_C/\hbar \approx 2\pi \times 121 MHz $$
+$$\hbar\omega_{01} = \hbar\frac{1}{\sqrt{L_{J0}C_J}} = 40.6\mu eV$$
+$$\omega_{01} = 2\pi \times 9.7GHz$$
+$$\omega_{12} = 2\pi \times 9.58GHz$$
+
+\end{document}

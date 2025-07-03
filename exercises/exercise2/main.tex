@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{gensymb}
+\usepackage{esvect}
+
+
+\title{Solutions to the Quantum Circuits and Devices by Prof. Ielmini exercise set \#2}
+\author{}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 1}
+\subsection{Question}
+Derive the Pauli operator for direction $\vv{n}$ described by $\theta = \frac{\pi}{2}$, $\phi = \frac{\pi}{4}$, calculate its corresponding eigenvectors and eigenvalues, and plot them on the Bloch sphere.
+\subsection{Answer}
+$$\vv{n} = \sin{\theta}\cos{\phi}\hat{x} + \sin{\theta}\sin{\phi}\hat{y} + \cos{\theta}\hat{z} \implies \sigma_{\hat{n}} = \vv{n}.\vv{\sigma} = $$
+
+$$n_x\sigma_x + n_y\sigma_y + n_z\sigma_z = \frac{\sqrt{2}}{2}\sigma_x + \frac{\sqrt{2}}{2}\sigma_y = $$
+
+$$\begin{bmatrix}
+    0 & \frac{\sqrt{2}}{2} - i\frac{\sqrt{2}}{2} \\
+    \frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2} & 0
+\end{bmatrix}$$
+The expectation is that:
+$$\ket{n_+} = \cos{\frac{\theta}{2}}\ket{0} + e^{i\phi}\sin{\frac{\theta}{2}}\ket{1} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}e^{i\frac{\pi}{4}}\ket{1}$$
+$$\ket{n_-} = \sin{\frac{\theta}{2}}\ket{0} - e^{i\phi}\cos{\frac{\theta}{2}}\ket{1} = \frac{1}{\sqrt{2}}\ket{0} - e^{i\frac{\pi}{4}}\frac{1}{\sqrt{2}}\ket{1}$$
+Let's investigate if we'll meet our expectations. The eigenvalues and vectors can be found:
+$$\sigma_{\hat{n}}\ket{n} = \lambda \ket{n} \equiv \det{\begin{bmatrix}
+    -\lambda & \frac{\sqrt{2}}{2} - i\frac{\sqrt{2}}{2} \\
+    \frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2} & -\lambda
+\end{bmatrix}} = 0 \implies$$
+$$\lambda^2 - (\frac{\sqrt{2}}{2} - i\frac{\sqrt{2}}{2})(\frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2}) = \lambda^2 - 1 = 0 \implies$$
+$$\lambda = \pm 1$$
+We call the eigenstate associated to the $\pm 1$ eigenvalue with $\ket{n_{\pm}}$. Therefore:
+$$\sigma_{\hat{n}} \ket{n_\pm} = \pm \ket{n_\pm} \equiv$$
+$$\begin{bmatrix}
+    0 & \frac{\sqrt{2}}{2} - i\frac{\sqrt{2}}{2} \\
+    \frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2} & 0
+\end{bmatrix}\begin{bmatrix}
+    n_1 \\
+    n_2
+\end{bmatrix} = \pm \begin{bmatrix}
+    n_1 \\
+    n_2
+\end{bmatrix} \implies$$
+$$(\frac{1}{\sqrt{2}} + i\frac{1}{\sqrt{2}})n_1 = \pm n_2 \implies e^{i\frac{\pi}{4}}n_1 = \pm n_2 \implies $$
+$$\ket{n_\pm} \equiv \begin{bmatrix}
+    n_1 \\ 
+    \pm e^{i\frac{\pi}{4}}n_1
+\end{bmatrix} = n_1\begin{bmatrix}
+    1 \\ 
+    \pm e^{i\frac{\pi}{4}}
+\end{bmatrix}$$
+As $\braket{n_\pm}{n_\pm} = 1$, then $n_1 = \frac{1}{\sqrt{2}}$, hence:
+$$\ket{n_\pm} = \frac{1}{\sqrt{2}}\ket{0} \pm e^{i\frac{\pi}{4}}\frac{1}{\sqrt{2}}$$
+Which are equivalent to what we expected.
+\section{Exercise 2}
+\subsection{Question}
+Let operator $\hat{O}$ be s.t. $\hat{O}\ket{0} = \ket{-}$ and $\hat{O}\ket{1} = \ket{+}$. Find an expression for $\hat{O}$.
+\subsection{Answer}
+One obvious solution that comes to mind is:
+$$\hat{O} = \ket{-}\bra{0} + \ket{+}\bra{1}$$
+One can try to write this in $\{ \ket{0}, \ket{1}\}$ basis:
+$$O_{11} = \bra{0}\hat{O}\ket{0} = \braket{0}{-} = \frac{1}{\sqrt{2}} , \quad O_{12} = \bra{0}\hat{O}\ket{1} = \braket{0}{+} = \frac{1}{\sqrt{2}}$$
+$$O_{21} = \bra{1}\hat{O}\ket{0} = \braket{1}{-} = -\frac{1}{\sqrt{2}} , \quad O_{22} = \bra{1}\hat{O}\ket{1} = \braket{1}{+} = \frac{1}{\sqrt{2}}$$
+Now, we test it in this basis:
+$$\hat{O}\ket{0} \equiv \begin{bmatrix}
+    \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+    -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+\end{bmatrix}\begin{bmatrix}
+    1 \\ 0
+\end{bmatrix} = \begin{bmatrix}
+    \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}}
+\end{bmatrix} \equiv \ket{
+-
+}$$
+And:
+$$\hat{O}\ket{1} \equiv \begin{bmatrix}
+    \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+    -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+\end{bmatrix}\begin{bmatrix}
+    0 \\ 1
+\end{bmatrix} = \begin{bmatrix}
+    \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}
+\end{bmatrix} \equiv \ket{
++
+}, \quad QED.$$
+
+
+\section{Exercise 3}
+\subsection{Question}
+ Consider a state $\ket{\psi}$. Knowing that $P_0(\ket{\psi}) = 0.2$, $P_1(\ket{\psi}) = 0.8$, $P_0(H\ket{\psi}) = 0.6$, $P_1(H\ket{\psi}) = 0.4$, $P_0(HS^\dagger \ket{\psi}) = 0.7$, and $P_1(HS^\dagger \ket{\psi}) = 0.3$. Estimate the angles $\theta$, $\phi$ on the Bloch sphere of the state. 
+\subsection{Answer}
+Any generic state in the $\{ \ket{0}, \ket{1}\}$ basis can be written as:
+$$\ket{\psi} = \cos{\frac{\theta}{2}}\ket{0} + e^{i\phi}\sin{\frac{\theta}{2}}\ket{1}, \quad P_0(\ket{\psi}) = |\braket{0}{\psi}|^2 = 0.2 = \cos^2{\frac{\theta}{2}}$$
+$$\implies \cos{\theta} = 2\cos^2{\frac{\theta}{2}} - 1 = -0.6 \implies \theta = \pi - \arccos{0.6}$$
+We define $\ket{\psi'}$:
+$$H\ket{\psi} = \ket{\psi'} = \cos{\frac{\theta}{2}}H\ket{0} + e^{i\phi}\sin{\frac{\theta}{2}}H\ket{1} = \cos{\frac{\theta}{2}}\frac{\ket{0} + \ket{1}}{\sqrt{2}} + e^{i\phi}\sin{\frac{\theta}{2}}\frac{\ket{0} - \ket{1}}{\sqrt{2}}$$
+$$= \frac{1}{\sqrt{2}}(\cos{\frac{\theta}{2}} + e^{i\phi}\sin{\frac{\theta}{2}})\ket{0} + \frac{1}{\sqrt{2}}(\cos{\frac{\theta}{2}} - e^{i\phi}\sin{\frac{\theta}{2}})\ket{1} \implies $$
+$$P_0(\ket{\psi'}) = \frac{1}{2}(\cos{\frac{\theta}{2}}+e^{i\phi}\sin{\frac{\theta}{2}})(\cos{\frac{\theta}{2}}+e^{-i\phi}\sin{\frac{\theta}{2}}) =  $$
+$$\frac{1}{2}(\cos^2{\frac{\theta}{2}} + \sin^2{\frac{\theta}{2}} + 2\sin{\frac{\theta}{2}}\cos{\frac{\theta}{2}}\cos{\phi}) = \frac{1}{2}(1 + \sin{\theta}\cos{\phi})$$
+$$\implies 1 + \sqrt{1 - \cos^2{\theta}}\cos{\phi} = 1 + 0.8\cos{\phi} = 1.2 \implies \cos{\phi} = 0.25$$
+Finally, according to the lecture notes $S = R_{\frac{\pi}{2}}$, where:
+$$R_\phi = \begin{bmatrix}
+    1 & 0 \\
+    0 & e^{i\phi}
+\end{bmatrix} \implies S^\dagger  = \begin{bmatrix}
+    1 & 0 \\
+    0 & -i
+\end{bmatrix}$$
+Let $\ket{\psi''} = HS^\dagger \ket{\psi}$, and more over:
+$$
+    HS^\dagger\ket{0} = H\ket{0} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}, \quad HS^\dagger\ket{1} = -iH\ket{1} = \frac{\ket{0} - \ket{1}}{\sqrt{2}i}
+\implies $$
+$$\ket{\psi''} = \cos{\frac{\theta}{2}}\frac{\ket{0} + \ket{1}}{\sqrt{2}} + e^{i\phi}\sin{\frac{\theta}{2}}\frac{\ket{0} - \ket{1}}{\sqrt{2}i}$$
+Which implies:
+$$P_0(\ket{\psi''}) = (\frac{\cos{\frac{\theta}{2}}-ie^{i\phi}\sin{\frac{\theta}{2}}}{\sqrt{2}})(\frac{\cos{\frac{\theta}{2}}+ie^{-i\phi}\sin{\frac{\theta}{2}}}{\sqrt{2}}) = $$
+$$= \frac{1}{2}(\cos^2{\frac{\theta}{2}} + \sin^2{\frac{\theta}{2}} - i\frac{e^{i\phi} - e^{-i\phi}}{2}\sin{\theta}) \implies (1 + \sin{\phi}\sin{\theta}) = 2\times 0.7$$
+$$\implies 0.4 = 0.8\times \sqrt{1-0.25^2} $$ Which is impossible and there's a self contradiction in the numbers given!
+\section{Exercise 4}
+\subsection{Question}
+Consider a two-qubit system with state $\ket{\psi} = \frac{1}{\sqrt{2}}(\ket{01} - \ket{10})$. Determine whether the state is a product state or entangled state.
+\subsection{Answer}
+By contradiction, let's suppose the state is a product state. The most generic product state in the basis is:
+$$\ket{\phi} = (a_1\ket{0}+b_1\ket{1})\otimes (a_2\ket{0}+b_2\ket{1}) = a_1a_2\ket{00}+a_1b_2\ket{01} +b_1a_2\ket{10} + a_2b_2\ket{11}$$
+We force the inequality $\ket{\psi} = \ket{\phi}$ which implies:
+$$a_1a_2=0,\quad a_2b_2=0,\quad a_1b_2 \ne 0, \quad b_1a_2 \ne 0$$
+Which is impossible. Therefore the state is entangled.
+\section{Exercise 5}
+\subsection{Question}
+Consider the two-qubit circuit in Fig. 1  where input qubits $\ket{\psi_1}$, $\ket{\psi_2}$ are prepared in the $\ket{0}$ and $\ket{1}$ state respectively. Determine the equivalent circuit operator $\hat{O}$, and the output state $\ket{\psi_0}$ of the circuit.
+\subsection{Answer}
+The equivalent circuit is:
+$$\hat{O} = \hat{U}_{CNOT}(H\otimes I)(I\otimes X) = \hat{U}_{CNOT}(H\otimes X) \equiv $$
+$$\begin{bmatrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 0 & 1\\
+    0 & 0 & 1 & 0
+\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 1 & 0 & 1  \\
+    1 & 0 & 1 & 0 \\
+    0 & 1 & 0 & -1  \\
+    1 & 0 & -1 & 0
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 1 & 0 & 1 \\
+    1 & 0 & 1 & 0 \\
+    1 & 0 & -1& 0 \\
+    0 & 1 & 0 & -1
+\end{bmatrix}$$
+As $\ket{\psi_0} = \hat{O}\ket{\psi_1}\otimes \ket{\psi_2}$:
+$$\ket{\psi_0} \equiv \frac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 1 & 0 & 1 \\
+    1 & 0 & 1 & 0 \\
+    1 & 0 & -1& 0 \\
+    0 & 1 & 0 & -1
+\end{bmatrix} \begin{bmatrix}
+    0 \\ 1 \\ 0 \\ 0
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 \\ 0 \\ 0 \\ 1
+\end{bmatrix} \equiv \frac{1}{\sqrt{2}}(\ket{00}+\ket{11}) = \ket{\Phi^+}$$
+\end{document}

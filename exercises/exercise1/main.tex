@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{gensymb}
+
+
+\title{Solutions to the Quantum Circuits and Devices by Prof. Ielmini exercise set \#1}
+\author{}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 1}
+\subsection{Question}
+Calculate all possible values of the angular momentum $L$, of its projection on the z-axis $L_z$, and of the magnetic dipole momentum along z $\mu_z$ of an electron when $l = 2$, and plot them graphically. 
+\subsection{Answer}
+For each value of $l$, we know that the total angular momentum eigenvalue is 
+$$L = \sqrt{l(l+1)\hbar^2)} = \sqrt{6}\hbar$$
+For $L_z$, we know that:
+$$-l \le m \le l \quad \text{s.t.} \quad l_z = m\hbar \implies l_z \in \{-2\hbar,-\hbar,0,\hbar,2\hbar\}$$
+$$\mu_z = -\mu_B \frac{L_z}{\hbar} = -\frac{e\hbar}{2m_e}m = -\mu_B m \implies \mu_z \in \{ 2\mu_B, \mu_B, 0, -\mu_B, -2\mu_B \}$$
+
+\section{Exercise 2}
+\subsection{Question}
+A qubit is localized on the Bloch sphere by angles $\theta = 50\degree{}$ and $\phi = 10\degree{}$. Draw the state on the Bloch sphere and calculate the state vector in the $\{ \ket{0}, \ket{1}\}$ basis and the probability of measuring the basis states.
+\subsection{Answer}
+We know that for a generic measurement along the $(\theta, \phi)$ axis, a general Hilbert 2D space vector can be written as:
+$$\ket{\psi} = \cos{(\frac{\theta}{2})}\ket{0} + e^{i\phi}\sin{(\frac{\theta}{2})}\ket{1}$$
+The drawing can't be much of work, so right to the state vector calculations:
+$$\ket{\psi} \approx 0.906\ket{0} + \exp{i\frac{\pi}{18}}0.423\ket{1}$$
+$\{ \ket{0}, \ket{1}\}$ being the $\{ \ket{z_+}, \ket{z_-}\}$ basis.
+Based on the Quantum Measure theory assumptions, the probability of collapsing onto any of the basis vectors is:
+$$Pr(\ket{0}) = \cos^2{\frac{\theta}{2}}  \approx 0.821, \quad Pr(\ket{1}) = \sin^2{\frac{\theta}{2}} \approx 0.179$$
+
+\section{Exercise 3}
+\subsection{Question}
+Consider a qubit $\ket{\psi} = (\frac{1}{2} + \frac{i}{2})\ket{0} - (\frac{1}{2\sqrt{2}} + i\frac{\sqrt{3}}{2\sqrt{2}})\ket{1}$
+\subsubsection{a}
+Locate the state on the Bloch sphere by calculating the corresponding angles $\theta$ and $\phi$.
+\subsubsection{b}
+Calculate the global rotation angle $\delta$ and the equivalent state $\ket{\psi'}$ with purely real $\alpha'$coefficient. 
+\subsection{Answer}
+\subsubsection{a}
+$$\ket{\psi} = \frac{\sqrt{2}}{2}\exp{i\frac{\pi}{4}}\ket{0} - \frac{\sqrt{2}}{2}\exp{i\frac{\pi}{3}}\ket{1} =$$
+$$\cos{\frac{\pi}{4}}\exp{i\frac{\pi}{4}} + \sin{\frac{\pi}{4}}\exp{i\frac{4\pi}{3}}\ket{1} \equiv $$
+$$
+\cos{\frac{\pi}{4}} + \sin{\frac{\pi}{4}}\exp{i(\frac{4\pi}{3} - \frac{\pi}{4})}\ket{1} =
+$$
+$$\cos{\frac{\pi}{4}}\ket{0} + \sin{\frac{\pi}{4}}\exp{i\frac{13\pi}{12}}\ket{1}$$
+Hence:
+$$\theta = \frac{\pi}{2},\quad \phi = \frac{13\pi}{12}$$
+
+\subsubsection{b}
+From the previous calculations:
+$$\delta = -\frac{\pi}{4}$$
+
+\section{Exercise 4}
+\subsection{Question}
+Consider two states $\ket{\psi}$, $\ket{\psi'}$ differing only by a global phase factor $e^{i\delta}$. Show that the probability of measuring a state $\ket{s}$ is identical for $\ket{\psi}$ and $\ket{\psi'}$, for any target state $\ket{s}$. 
+\subsection{Answer}
+Let 
+$$\ket{\psi'} = e^{i\delta}\ket{\psi}$$
+We have that:
+$$ Pr\{\ket{s}\}_{\psi} = \text{Probability of measuring states s when the current state is $\psi$} = |\braket{\psi}{s}|^2  $$
+$$Pr\{\ket{s}\}_{\psi'} = |\braket{\psi'}{s}|^2 = \braket{\psi'}{s}\braket{s}{\psi'} = \bra{\psi}e^{-i\delta}\ket{s}\bra{s}e^{i\delta}\ket{\psi} = \braket{\psi}{s}\braket{s}{\psi} = |\braket{\psi}{s}|^2 $$
+$$= Pr\{\ket{s}\}_{\psi} \implies Pr\{\ket{s}\}_{\psi'} = Pr\{\ket{s}\}_{\psi} \quad QED.$$
+
+\section{Exercise 5}
+\subsection{Question}
+Consider the Stern-Gerlach experimental setup in Fig. 1, where the input qubit is prepared in state $\ket{\psi} = \frac{1}{\sqrt{2}}\ket{0} - (\frac{1+\sqrt{3}}{4} - i\frac{1-\sqrt{3}}{4})\ket{1}$:
+\subsubsection{a}
+Calculate the measurement probability for states $\ket{x_+}$, $\ket{x_-}$ and $\ket{y_+}$, $\ket{y_-}$ after the corresponding experimental setups.  
+\subsubsection{b}
+Suppose now to collimate both the $\ket{x_+}$, $\ket{x_-}$ output beams into the second SG setup. Calculate the measurement probability for $\ket{y_+}$, $\ket{y_-}$ after the second SG setup.  
+\subsection{Answer}
+Let:
+$$\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$$
+Where:
+$$\alpha = \frac{1}{\sqrt{2}},\quad \beta = - (\frac{1+\sqrt{3}}{4} - i\frac{1-\sqrt{3}}{4}) $$
+\subsubsection{a}
+$$Pr\{\ket{x_+}\}_{\psi} = |\braket{x_+}{\psi}|^2 = |\frac{\bra{0}+\bra{1}}{\sqrt{2}}(\alpha\ket{0} + \beta\ket{1})|^2 = $$
+$$|\frac{\alpha + \beta}{\sqrt{2}}|^2 = \frac{1}{2}|\alpha + \beta|^2 = \frac{1}{2}[(\frac{1}{\sqrt{2}} - \frac{1+\sqrt{3}}{4} )^2 + (\frac{1-\sqrt{3}}{4})^2]$$
+$$= \frac{1}{2}[\frac{1}{2} + \frac{4 + 2\sqrt{3}}{16} - \frac{\sqrt{2} + \sqrt{6}}{4} + \frac{4 - 2\sqrt{3}}{16}] = \frac{1}{2} - \frac{\sqrt{2} + \sqrt{6}}{8} \approx 0.0170$$
+$$\implies Pr\{\ket{x_-}\}_{\psi} = 1 - Pr\{\ket{x_+}\}_{\psi} \approx 0.983$$
+Only the states of $\ket{x_+}$ are measured in the second experiment:
+$$Pr\{\ket{y_+}\}_{x_+} = |\braket{x_+}{y_+}|^2 = \frac{1}{2} = 1 - Pr\{\ket{y_+}\}_{x_-} = \frac{1}{2}$$
+\subsubsection{b}
+The density matrix after collimating both beams will be:
+$$\rho = 0.017^2\ket{x_+}\bra{x_+} + 0.893^2\ket{x_-}\bra{x_-} = p_0\ket{x_+}\bra{x_+} + p_1\ket{x_-}\bra{x_-}$$
+Hence:
+$$Pr\{\ket{y_+}\}_{\rho} = \Tr{\rho \ket{y_+}\bra{y_+}} = \Tr{p_0\braket{x_+}{y_+}\ket{x_+}\bra{y_+} + p_1\braket{x_-}{y_+}\ket{x_-}\bra{y_+}}$$
+$$= p_0 |\braket{x_+}{y_+}|^2 + p_1 |\braket{x_-}{y_+}|^2 = \frac{p_0+p_1}{2} = \frac{1}{2} = 1 - Pr\{\ket{y_-}\}_{\rho} = \frac{1}{2}  $$
+\end{document}

@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{gensymb}
+\usepackage{esvect}
+
+
+\title{Solutions to the Quantum Circuits and Devices by Prof. Ielmini exercise set \#4}
+\author{}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 1}
+\subsection{Question}
+Consider an electron subject to a static magnetic field $B_0 = 1 T$ along $\vv{z}$ and a resonant magnetic field of amplitude $B_1 = 1 mT$ along $\vv{x}$ coupled to the electron. After calculating the frequency of the resonant field, derive:  
+\subsubsection{a}
+The pulse envelope amplitude to operate an $X$ gate, when the pulse duration is $t_1 = 100 ns$.
+\subsubsection{b}
+the pulse duration to operate an $X$ gate, when the pulse envelope amplitude is $\eta  = 0.5$
+\subsection{Answer}
+The Larmor and resonant frequency will be $\omega_L = |\gamma|B_0 = \frac{e}{m_e}B_0$ and $\Omega = \frac{\mu_B}{\hbar}B_1 = \frac{e}{2m_e}B_1$. Numerically:
+$$\Omega = 2\pi \times 14MHz$$
+\subsubsection{a}
+For a full bit-flip operation:
+$$\Omega t = \pi = 2\pi \times 14 MHz \times \eta \times 10^{-7} \implies \eta = \frac{1}{2.8} \approx 0.36$$
+\subsubsection{b}
+Again:
+$$\Omega t = \pi = 2\pi \times 14MHz \times \eta \times t \implies t = \frac{1}{14} 10^{-6} \approx 71.43 ns$$
+
+\section{Exercise 2}
+\subsection{Question}
+Consider an electron subject to a static magnetic field $B_0 = 1T$ along $\vv{z}$. A resonant magnetic field with tunable phase of amplitude $B_1 = 1mT $ along $\vv{x}$ is coupled to the electron by an on/off switch with no amplitude modulation. Calculate the frequency of the resonant field and draw the pulse schedule to operate the gate $\hat{O} = \hat{H}.\hat{X}$.  
+\subsection{Answer}
+We could investigate the application of $O$ altogether and design a pulse time for it:
+$$\theta(t_p) = \int_0^{t_p} \eta(t).\Omega dt$$
+If it's only going to be a pulse and $\Omega = \frac{2\mu_B}{\hbar}\frac{B_1}{2} = \frac{\mu_B}{\hbar}B_1 = 2\pi\times 14MHz$.
+One can tune $delta$ to do a precession around $\vv{x}$, ($\delta = 0$) or around $\vv{y}$, ($\delta = \frac{\pi}{2}$). A Hadamard gate is $H = XY^{1/2}$. Proof:
+$$Y^{1/2} = R_{\hat{y}}(\frac{\pi}{2}) = e^{-i\frac{\pi}{4}\sigma_y} = \cos{\frac{\pi}{4}}I -i\sin{\frac{\pi}{4}}\sigma_y = \begin{bmatrix}
+    \cos{\frac{\pi}{4}} & 0\\
+    0 & \cos{\frac{\pi}{4}}
+\end{bmatrix}-i\begin{bmatrix}
+    0 & -i\sin{\frac{\pi}{4}} \\
+    i\sin{\frac{\pi}{4}} & 0
+\end{bmatrix}$$
+$$= \frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 & -1 \\
+    1 & 1
+\end{bmatrix} \implies XY^{1/2} = \begin{bmatrix}
+    0 & 1\\
+    1 & 0
+\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 & -1 \\
+    1 & 1
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 & 1\\
+    1 & -1
+\end{bmatrix}=H$$
+Overall, the gate will be implemented as:
+$$\hat{O} = X Y^{1/2}X$$
+\begin{itemize}
+    \item A full bit flip with $\delta = 0$, $t_1 = t_p = \frac{\pi}{\Omega} \approx 35.71 ns$.
+    \item A $\frac{\pi}{2}$ phase change with $t_2 = \frac{t_p}{2} \approx 17.86ns$, with $\delta = \frac{\pi}{2}$.
+    \item A full bit flip again with $\delta = 0$, and $t_3 = t_p$
+\end{itemize}
+\section{Exercise 3}
+\subsection{Question}
+An electron is immersed in a static magnetic field $B_0 = 1T$ directed along $\vv{z}$ and coupled to a resonant magnetic field of amplitude $B_1 = 1mT$ along $\vv{x}$. Calculate the timing accuracy of a control system to provide a rotation angle accuracy $\Delta \theta = \frac{\pi}{100}$.
+\subsection{Answer}
+$$\Delta\theta = \eta\Omega\Delta t \implies \Delta t \leq \frac{\Delta\theta}{\Omega} = \frac{\pi}{1000\times 2\pi \times 14\times 10^6} \approx 35.71 ps$$
+
+\section{Exercise 4}
+\subsection{Question}
+Consider a quantum system with natural frequency $\omega_{01} = 2\pi.5 GHz$ and anharmonicity $\Delta\omega = 2\pi.200 MHz$ where a $\pi$-rotation pulse along $\vv{x}$ is operated by ESR. Compare the driving amplitudes $\eta$ and spectral amplitudes $\mathcal{B}$ of the driving field for the $\ket{1} \xrightarrow{}  \ket{2}$ transition for a driving pulse with:  
+% \degree doesn't need ^ before it 
+\subsubsection{a}
+rectangular envelope of amplitude $\eta_1$ and width $t_1 = 10ns$.
+\subsubsection{b}
+rectangular envelope of amplitude $\eta_2$ and width $t_2 = 100ns$.
+\subsubsection{c}
+Gaussian envelope of amplitude $\eta_3$ with FWHM $\Delta t = 10ns$.
+
+\subsection{Answer}
+The meaning of the anharmonicity is that for a transition $\ket{0}\xrightarrow{}\ket{1}$, the freq. is $\omega_{01}$, and for a transition $\ket{1}\xrightarrow{}\ket{2}$, the freq. is $\omega_{01}+\Delta\omega$. The idea is to make a transition between the first two and not a third transition. Let $B_c(t) = \eta(t)B_1\cos{\omega_{01} t}$. We want the power to be absent at $\omega_{01}+\Delta\omega$ freq.
+
+\subsubsection{a}
+$$\mathcal{F}(B_c(t)) = \mathcal{B} = \mathcal{F}(\eta(t))*\mathcal{F}(B_1\cos{\omega_{01}t}) = \mathcal{F}(\eta_1.rect(\frac{t}{t_1}))*B_1\delta(\omega-\omega_{01}) = $$
+$$\eta_1t_1.\text{sinc}(\frac{\omega t_1}{2}) * B_1\delta(\omega-\omega_{01}) = \eta_1B_1t_1.\text{sinc}(\frac{(\omega-\omega_{01})t_1}{2}) \implies  $$
+$$\frac{\mathcal{B}(\omega_{01}+\Delta\omega)}{\mathcal{B}(\omega_{01})}=\text{sinc}(\frac{\Delta\omega .t_1}{2}) = \text{sinc}(2\pi) = 0$$
+The answer in the exercise class isn't correct. Different numbers should have been used to prove that Gaussian envelopes are better.
+$$\Omega_1 = \eta_1\Omega \implies \theta = \pi = \int_0^{t_1}\Omega_1(t)dt = \eta_1t_1\Omega$$
+Similarly:
+$$\theta = \pi = \eta_2t_2\Omega$$
+And finally:
+$$\theta = \pi \approx \int_{-\infty}^\infty\eta_3\exp{-\frac{t^2}{2\sigma^2}}dt = \eta_3\sqrt{2\pi\sigma^2} = \eta_3\sqrt{\frac{\pi\Delta t^2}{4\ln{2}}} = \eta_3\sqrt{\frac{\pi}{4\ln{2}}}\Delta t$$
+Hence:
+$$\frac{\eta_2}{\eta_1} = \frac{1}{10},\quad \frac{\eta_3}{\eta_1}= 0.94, \quad \frac{\eta_2}{\eta_3} = 10.64$$
+\subsubsection{b}
+$$\frac{\mathcal{B}(\omega_{01}+\Delta\omega)}{\mathcal{B}(\omega_{01})} = \text{sinc}(20\pi) = 0$$
+\subsubsection{c}
+Let the envelope be:
+$$\eta(t) = \eta_3\exp{-\frac{t^2}{2\sigma^2}}$$.
+At $t_{FWHM} = \Delta t/2$:
+$$\frac{1}{2} = \exp{-\frac{\Delta t^2}{8\sigma^2}} \implies 8\sigma^2 = \frac{\Delta t^2}{\ln{2}} \implies \sigma = \frac{\Delta t}{2\sqrt{2\ln{2}}}$$
+So:
+$$\mathcal{B} = \eta_3B_1\sqrt{2\pi\sigma^2}\exp{-\frac{(\omega-\omega_{01})^2\sigma^2}{2}} \implies $$
+$$\frac{\mathcal{B}(\omega_{01}+\Delta\omega)}{\mathcal{B}(\omega_{01})} = \exp{-\frac{(\Delta\omega)^2 \sigma^2}{2}} = \exp{-\frac{(\Delta\omega)^2 \Delta t}{8\ln{2}}}$$
+
+The important message is that for a Gaussian envelope the frequency content decays far more rapidly (exponentially), with respect to a sinusoidal.
+% \section{Exercise 5}
+% \subsection{Question}
+% An electron is immersed in a static magnetic field $B = 1 T$ directed along $\vv{z}$. Calculate the timing accuracy of a control system to provide a rotation angle accuracy $\Delta\theta = \frac{\pi}{1000}$.
+% \subsection{Answer}
+% The Larmor frequency for such a magnetic field is: $\omega_L = |\gamma|B = 175.824 \quad G\text{rad/s}$. Then $\omega_L\Delta t = \Delta\theta \implies \Delta t \approx 17.85 \quad fs$.
+\end{document}
