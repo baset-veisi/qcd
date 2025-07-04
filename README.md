@@ -1,4 +1,4 @@
-# Quantum Circuit Devices (QCD)
+# Quantum Circuits and Devices (QCD)
 
 > **Hands‑on laboratories, projects & exercises in quantum computing with Qiskit**\
 >
